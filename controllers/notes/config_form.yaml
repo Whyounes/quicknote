@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Note
+
+# Model Form Field configuration
+form: $/rafie/quicknote/models/note/fields.yaml
+
+# Model Class name
+modelClass: RAFIE\Quicknote\Models\Note
+
+# Default redirect location
+defaultRedirect: rafie/quicknote/notes
+
+# Create page
+create:
+    title: Create Notes
+    redirect: rafie/quicknote/notes/update/:id
+    redirectClose: rafie/quicknote/notes
+
+# Update page
+update:
+    title: Edit Notes
+    redirect: rafie/quicknote/notes
+    redirectClose: rafie/quicknote/notes
+
+# Preview page
+preview:
+    title: Preview Notes

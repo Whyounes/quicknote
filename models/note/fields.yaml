@@ -1,0 +1,16 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+  title:
+    placeholder: Title
+
+  description:
+    type: textarea
+    size: huge
+    placeholder: You have something to say?
+
+  important:
+    type: hint
+    path: @/plugins/rafie/quicknote/models/note/partials/create_note_hint.htm

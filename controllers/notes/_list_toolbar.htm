@@ -1,0 +1,23 @@
+<div data-control="toolbar">
+    <a href="<?= Backend::url('rafie/quicknote/notes/create') ?>" class="btn btn-primary oc-icon-plus">New Note</a>
+
+    <button
+            id = "remove_notes"
+            class="btn btn-primary oc-icon-trash-o"
+            data-request="onDelete"
+            data-trigger-type="enable"
+            data-trigger = ".list-checkbox input[type='checkbox']"
+            data-trigger-condition="checked"
+            data-request-success="$el.attr('disabled', 'disabled');"
+            disabled
+            >
+        Remove Note(s)</button>
+</div>
+
+<script>
+    $("#remove_notes").click(function(){
+        $(this).data('request-data', {
+            notes: $('.list-checkbox input[type=\'checkbox\']').listWidget('getChecked')
+        })
+    });
+</script>

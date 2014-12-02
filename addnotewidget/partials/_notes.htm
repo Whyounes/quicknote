@@ -1,0 +1,34 @@
+<div class="report-widget">
+    <h3>Quick Note</h3>
+
+    <div class="pane">
+    <ul class="list-nostyle">
+        <?php foreach( $notes as $note ): ?>
+            <li class="list-group-item"><?= $note->title ?></li>
+        <?php endforeach ?>
+    </ul>
+    </div>
+
+    <br/>
+
+    <form></form>
+    <?= Form::open([
+            'url'       => Backend::url('rafie/quicknote/notes/store'),
+            'method'    => 'POST'
+        ]);
+    ?>
+    <div class="form-group">
+        <input class="form-control" type="text" name="title" placeholder="Title" required />
+    </div>
+
+    <div class="form-group">
+        <textarea class="form-control" name="note" id="" cols="30" rows="10" placeholder="You have something to say?"></textarea>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Submit" />
+        <a href="<?= Backend::url('rafie/quicknote/notes/index') ?>">Manage your notes</a>
+    </div>
+
+    <?= Form::close(); ?>
+</div>
