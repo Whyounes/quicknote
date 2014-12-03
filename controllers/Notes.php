@@ -40,6 +40,8 @@ class Notes extends Controller
 
         $note->save();
 
+        \Flash::success('Note added successfully.');
+
         return \Redirect::to( Backend::url() );
     }
 
@@ -92,4 +94,5 @@ class Notes extends Controller
 
         return $this->listRefresh();
     }
+
 }

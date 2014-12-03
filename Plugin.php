@@ -35,5 +35,5 @@ class Plugin extends PluginBase
             $model->hasMany['notes'] = ['RAFIE\Quicknote\Models\Notes'];
         });
     }
-    
+
 }
