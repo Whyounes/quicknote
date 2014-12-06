@@ -22,7 +22,7 @@ class Plugin extends PluginBase
     public function registerReportWidgets()
     {
         return [
-            'RAFIE\QuickNote\AddNoteWidget' => [
+            'RAFIE\QuickNote\QuickNoteWidget' => [
                 'label'     => 'Quick Notes',
                 'context'   => 'dashboard'
             ]
@@ -32,7 +32,7 @@ class Plugin extends PluginBase
     public function boot()
     {
         User::extend(function($model){
-            $model->hasMany['notes'] = ['RAFIE\Quicknote\Models\Notes'];
+            $model->hasMany['notes'] = ['RAFIE\Quicknote\Models\Note'];
         });
     }
 

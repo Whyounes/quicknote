@@ -18,6 +18,8 @@ class Note extends Model
         'title'         => 'required|min:4'
     ];
 
+    protected $throwOnValidation = false;
+
     public $belongsTo = [ 'user' => [ 'Backend\Models\User' ] ];
 
 }

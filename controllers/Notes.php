@@ -7,6 +7,9 @@ use Backend\Classes\Controller;
 use \RAFIE\Quicknote\Models\Note;
 use Illuminate\Support\Facades\Input;
 use \RAFIE\Quicknote\Models;
+use Rafie\QuickNote\Plugin;
+use System\Classes\PluginManager;
+
 /**
  * Notes Back-end Controller
  */
@@ -23,24 +26,27 @@ class Notes extends Controller
     public function __construct()
     {
         parent::__construct();
+
         $this->pageTitle = 'Manage Quick Notes';
 
         //BackendMenu::setContext('RAFIE.Quicknote', 'quicknote', 'notes');
     }
 
     public function store(){
-        //issue [https://github.com/octobercms/october/issues/799]
-        //$app = App::make('app');
-        //$auth = new \Illuminate\Auth\AuthManager($app);
-
         $note = new Models\Note;
         $note->title = Input::get('title');
         $note->description = Input::get('description', null);
         $note->user_id = BackendAuth::getUser()->id;
 
-        $note->save();
+        if( $note->save() ) {
+            \Flash::success('Note added successfully.');
+        }
+        else{
+            $messages = array_flatten( $note->errors()->getMessages() );
+            $errors = implode( ' - ', $messages );
 
-        \Flash::success('Note added successfully.');
+            \Flash::error('Validation error: ' . $errors );
+        }
 
         return \Redirect::to( Backend::url() );
     }
@@ -55,7 +61,7 @@ class Notes extends Controller
     }
 
     // filtering notes by user, use also @listExtendQueryBefore
-    public function listExtendQuery($query){
+    public function listExtendQueryBefore($query){
         $user_id = BackendAuth::getUser()->id;
 
         $query->where('user_id', '=', $user_id);
@@ -64,22 +70,6 @@ class Notes extends Controller
     public function listOverrideColumnValue($record, $columnName){
         if( $columnName == "description" && empty($record->description) )
             return "[EMPTY]";
-
-        if( $columnName == "action" ){
-            $href = Backend::url('rafie/quicknotes/notes/remove/' . $record->id );
-
-            return "<a href='" . $href . "' title='Remove Notes'><i class='icon-remove'></i></a>";
-        }//if
-
-    }
-
-    public function listExtendColumns($list){
-        /*$list->addColumns([
-            'action' => [
-                'label'     => 'Actions',
-                'sortable'  => false
-            ]
-        ]);*/
     }
 
     // or you can name it index_onDelete

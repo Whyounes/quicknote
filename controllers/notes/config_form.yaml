@@ -25,7 +25,3 @@ update:
     title: Edit Notes
     redirect: rafie/quicknote/notes
     redirectClose: rafie/quicknote/notes
-
-# Preview page
-preview:
-    title: Preview Notes
